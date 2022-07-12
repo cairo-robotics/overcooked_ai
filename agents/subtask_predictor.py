@@ -23,7 +23,8 @@ from torch.utils.data import DataLoader
 from torch.distributions.categorical import Categorical
 import wandb
 import tensorflow as tf
-
+import torch
+import random
 def get_output_shape(model, image_dim):
     return model(th.rand(*(image_dim))).data.shape[1:]
 
@@ -39,12 +40,14 @@ def merge_two_dicts(x, y):
     return z
 
 class SubtaskPredictor(nn.Module):
-    def __init__(self, device, visual_obs_shape, agent_obs_shape, depth=16, act=nn.ReLU, hidden_dim1=512, hidden_dim2=256):
+    def __init__(self, device, visual_obs_shape, agent_obs_shape, depth=16, act=nn.ReLU, hidden_dim1=256, hidden_dim2=512, hidden_dim3 = 1024, hidden_dim4=4000):
         super(SubtaskPredictor, self).__init__()
         self.device = device
         self.act = act
         self.hidden_dim1 = hidden_dim1
         self.hidden_dim2 = hidden_dim2
+        self.hidden_dim3 = hidden_dim3
+        self.hidden_dim4 = hidden_dim4
         self.use_visual_obs = np.prod(visual_obs_shape) > 0
         assert len(agent_obs_shape) == 1
         self.use_agent_obs = np.prod(agent_obs_shape) > 0
@@ -71,18 +74,15 @@ class SubtaskPredictor(nn.Module):
         else:
             self.cnn_output_shape = 0
 
-        print(self.cnn_output_shape + agent_obs_shape[0] +self.subtasks_obs+ 10*self.subtasks_obs+ Subtasks.NUM_SUBTASKS)
+        print("input size:", self.cnn_output_shape + agent_obs_shape[0] +self.subtasks_obs+ 10*self.subtasks_obs+ Subtasks.NUM_SUBTASKS)
         # Define layers
         self.rnn = nn.Sequential(
-            nn.Linear(self.cnn_output_shape + agent_obs_shape[0] +self.subtasks_obs+ 10*self.subtasks_obs+ Subtasks.NUM_SUBTASKS, self.hidden_dim1),
-            # nn.Dropout(),
-            act(),
-            nn.Linear(self.hidden_dim1, self.hidden_dim2),
+            nn.Linear(self.cnn_output_shape + agent_obs_shape[0] +self.subtasks_obs+ 10*self.subtasks_obs+ Subtasks.NUM_SUBTASKS, self.hidden_dim4),
             nn.Dropout(),
-            act(),
+            act()
         )
         #fully connected layer for prediction output
-        self.fc =  nn.Linear(self.hidden_dim2, Subtasks.NUM_SUBTASKS)
+        self.fc =  nn.Linear(self.hidden_dim4, Subtasks.NUM_SUBTASKS)
         #initialize weights
         self.apply(weights_init_)
         self.to(self.device)
@@ -241,7 +241,9 @@ class SP_trainer():
         return metrics
 
     def evaluate(self, num_trials):
-        dataloader = DataLoader(self.dataset, batch_size=num_trials, shuffle=True, num_workers=4)
+        rand_sampler = torch.utils.data.RandomSampler(self.dataset, num_samples=num_trials, replacement=True)
+        dataloader = torch.utils.data.DataLoader(self.dataset, batch_size=num_trials, sampler=rand_sampler)
+        # dataloader = DataLoader(self.dataset, batch_size=num_trials, shuffle=True, num_workers=4)
         batch = next(iter(dataloader))
         eval_acc = self.evaluate_on_batch(batch)
         return eval_acc
@@ -250,7 +252,8 @@ class SP_trainer():
         metrics = {}
         for i in range(2):
             self.players[i].train()
-        dataloader = DataLoader(self.dataset, batch_size=args.batch_size, shuffle=True, num_workers=4)
+        dataloader = DataLoader(self.dataset, batch_size=args.batch_size, shuffle= False, num_workers=4)
+        dataloader = random.sample(list(dataloader), len(dataloader))
         for batch in tqdm(dataloader):
             # update hidden state at beginning of batch for each player
             for i in range(self.num_players):
