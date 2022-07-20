@@ -6,7 +6,11 @@ from overcooked_ai_py.mdp.actions import Action
 from overcooked_ai_py.mdp.overcooked_mdp import OvercookedGridworld, EVENT_TYPES
 from overcooked_ai_py.mdp.overcooked_trajectory import TIMESTEP_TRAJ_KEYS, EPISODE_TRAJ_KEYS, DEFAULT_TRAJ_KEYS
 from overcooked_ai_py.planning.planners import MediumLevelActionManager, MotionPlanner, NO_COUNTERS_PARAMS
-
+import sys
+print(sys.path)
+sys.path.append('/home/biswas/overcooked_ai')
+from agents.heuristics import Heuristic
+from agents.arguments import get_arguments
 DEFAULT_ENV_PARAMS = {
     "horizon": 400
 }
@@ -59,6 +63,12 @@ class OvercookedEnv(object):
         if self.horizon >= MAX_HORIZON and self.info_level > 0:
             print("Environment has (near-)infinite horizon and no terminal states. \
                 Reduce info level of OvercookedEnv to not see this message.")
+        self.history0 = []
+        self.history1 = []
+        self.history =[[],[]]
+        self.args = get_arguments()
+
+        
 
     @property
     def mlam(self):
@@ -196,19 +206,25 @@ class OvercookedEnv(object):
         assert not self.is_done()
         if joint_agent_action_info is None: joint_agent_action_info = [{}, {}]
         next_state, mdp_infos = self.mdp.get_state_transition(self.state, joint_action, display_phi, self.mp)
-
-        # Update game_stats 
-        self._update_game_stats(mdp_infos)
-
+        mp = MotionPlanner(self.mdp)
+        HC = Heuristic(OvercookedGridworld.from_layout_name(self.args.layout), self.state, mp)
+        # Update game_stats and save current task pointer
+        self.curr_game_stats = self._update_game_stats(mdp_infos)
+        self.prev_game_stats = self.curr_game_stats['task_pointer']
         # Update state and done
         self.state = next_state
         done = self.is_done()
         env_info = self._prepare_info_dict(joint_agent_action_info, mdp_infos)
-        
-        if done: self._add_episode_info(env_info)
-
+        if done: 
+            # print("Done")
+            self.history0 = []
+            self.history1 = []
+            self.history = [[],[]]
+            self._add_episode_info(env_info)
         timestep_sparse_reward = sum(mdp_infos["sparse_reward_by_agent"])
-        return (next_state, timestep_sparse_reward, done, env_info)
+        heuristics = HC.compute_heuristics(self.history[0], self.history[1])
+        print("heuristics:", heuristics)
+        return (next_state, timestep_sparse_reward, done, env_info, heuristics)
 
     def lossless_state_encoding_mdp(self, state):
         """
@@ -298,13 +314,62 @@ class OvercookedEnv(object):
         """
         self.game_stats["cumulative_sparse_rewards_by_agent"] += np.array(infos["sparse_reward_by_agent"])
         self.game_stats["cumulative_shaped_rewards_by_agent"] += np.array(infos["shaped_reward_by_agent"])
-
+        self.game_stats["task_pointer"] = [[0,0,0],[0,0,0]]
+        self.game_stats["current timestep"] = self.state.timestep
         for event_type, bool_list_by_agent in infos["event_infos"].items():
             # For each event type, store the timestep if it occurred
             event_occurred_by_idx = [int(x) for x in bool_list_by_agent]
             for idx, event_by_agent in enumerate(event_occurred_by_idx):
                 if event_by_agent:
                     self.game_stats[event_type][idx].append(self.state.timestep)
+        if self.state.timestep!=0:
+            for idx,player in enumerate(self.state.players):
+                if infos['event_infos']['onion_pickup'][idx] == True:
+                    self.game_stats["task_pointer"][idx][0] = 1
+                    # label all previous timesteps post an interact action with onion subtask
+                    for sample in reversed(self.history[idx]):
+                        if sample[1]==1 or sample[2]==1:
+                            break
+                        sample[0] =1
+                if infos['event_infos']['dish_pickup'][idx] == True:
+                    self.game_stats["task_pointer"][idx][1] = 1
+                    # label previous timesteps post an interact action with dish subtask
+                    for sample in reversed(self.history[idx]):
+                        if sample[0]==1 or sample[2]==1:
+                            break
+                        sample[1] =1
+                if infos['event_infos']['soup_pickup'][idx] == True:
+                    self.game_stats["task_pointer"][idx][2] = 1
+                    # label previous timesteps post an interact action with soup subtask
+                    for sample in reversed(self.history[idx]):
+                        if sample[0]==1 or sample[1]==1:
+                            break
+                        sample[2] =1
+                
+                # if previous timestep has ac
+                if self.prev_game_stats[idx][0] == 1:
+                    self.game_stats["task_pointer"][idx][0] = 1
+                    # is end of subtask?
+                    if infos['event_infos']['onion_drop'][idx] == True or infos['event_infos']['potting_onion'][idx] == True:
+                        self.game_stats["task_pointer"][idx][0] = 0
+                if self.prev_game_stats[idx][1] == 1:
+                    self.game_stats["task_pointer"][idx][1] = 1
+                    # is end of subtask?
+                    if infos['event_infos']['dish_drop'][idx] == True:
+                        self.game_stats["task_pointer"][idx][1] = 0
+
+                if self.prev_game_stats[idx][2] == 1:
+                    self.game_stats["task_pointer"][idx][2] = 1
+                    # is end of subtask?
+                    if infos['event_infos']['soup_drop'][idx] == True or infos['event_infos']['soup_delivery'][idx] == True:
+                        self.game_stats["task_pointer"][idx][2] = 0
+        # 1x3 array for each agent corresponding to each subclass of tasks
+        task_ptr = self.game_stats["task_pointer"]
+        # add to history of subtasks
+        self.history[0].append(self.game_stats["task_pointer"][0]) 
+        self.history[1].append(self.game_stats["task_pointer"][1]) 
+        return self.game_stats
+            
 
 
     ####################
