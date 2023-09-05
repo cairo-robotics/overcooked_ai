@@ -3,7 +3,7 @@ import time
 import numpy as np
 from overcooked_ai_py.utils import mean_and_std_err, append_dictionaries
 from overcooked_ai_py.mdp.actions import Action
-from overcooked_ai_py.mdp.overcooked_mdp import OvercookedGridworld, EVENT_TYPES
+from overcooked_ai_py.mdp.overcooked_mdp import OvercookedGridworld, EVENT_TYPES, Recipe
 from overcooked_ai_py.mdp.overcooked_trajectory import TIMESTEP_TRAJ_KEYS, EPISODE_TRAJ_KEYS, DEFAULT_TRAJ_KEYS
 from overcooked_ai_py.planning.planners import MediumLevelActionManager, MotionPlanner, NO_COUNTERS_PARAMS
 
@@ -249,6 +249,10 @@ class OvercookedEnv(object):
             "cumulative_shaped_rewards_by_agent": np.array([0] * self.mdp.num_players)
         }
         self.game_stats = {**events_dict, **rewards_dict}
+
+        self.state.set_orders([Recipe.from_dict(x) for x in np.random.choice(self.mdp.start_all_orders, size=2, replace=True)])
+        print("initializing with orders: {}".format(self.state.all_orders))
+        print("from all orders: {}".format(self.mdp.start_all_orders))
 
     def is_done(self):
         """Whether the episode is over."""
