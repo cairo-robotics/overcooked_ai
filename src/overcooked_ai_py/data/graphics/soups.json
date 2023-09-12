@@ -4,13 +4,13 @@
 			"image": "soups.png",
 			"format": "RGBA8888",
 			"size": {
-				"w": 405,
+				"w": 540,
 				"h": 15
 			},
 			"scale": 1,
 			"frames": [
 				{
-					"filename": "soup_cooked_tomato_0_onion_1.png",
+					"filename": "soup_cooked_onion_1.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -31,7 +31,7 @@
 					}
 				},
 				{
-					"filename": "soup_cooked_tomato_0_onion_2.png",
+					"filename": "soup_cooked_onion_2.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -52,7 +52,7 @@
 					}
 				},
 				{
-					"filename": "soup_cooked_tomato_0_onion_3.png",
+					"filename": "soup_cooked_onion_3.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -73,7 +73,7 @@
 					}
 				},
 				{
-					"filename": "soup_cooked_tomato_1_onion_0.png",
+					"filename": "soup_cooked_tomato_1.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -136,7 +136,7 @@
 					}
 				},
 				{
-					"filename": "soup_cooked_tomato_2_onion_0.png",
+					"filename": "soup_cooked_tomato_2.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -178,7 +178,7 @@
 					}
 				},
 				{
-					"filename": "soup_cooked_tomato_3_onion_0.png",
+					"filename": "soup_cooked_tomato_3.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -199,7 +199,7 @@
 					}
 				},
 				{
-					"filename": "soup_done_tomato_0_onion_1.png",
+					"filename": "soup_done_onion_1.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -220,7 +220,7 @@
 					}
 				},
 				{
-					"filename": "soup_done_tomato_0_onion_2.png",
+					"filename": "soup_done_onion_2.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -241,7 +241,7 @@
 					}
 				},
 				{
-					"filename": "soup_done_tomato_0_onion_3.png",
+					"filename": "soup_done_onion_3.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -262,7 +262,7 @@
 					}
 				},
 				{
-					"filename": "soup_done_tomato_1_onion_0.png",
+					"filename": "soup_done_tomato_1.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -325,7 +325,7 @@
 					}
 				},
 				{
-					"filename": "soup_done_tomato_2_onion_0.png",
+					"filename": "soup_done_tomato_2.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -367,7 +367,7 @@
 					}
 				},
 				{
-					"filename": "soup_done_tomato_3_onion_0.png",
+					"filename": "soup_done_tomato_3.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -388,7 +388,7 @@
 					}
 				},
 				{
-					"filename": "soup_idle_tomato_0_onion_1.png",
+					"filename": "soup_idle_onion_1.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -409,7 +409,7 @@
 					}
 				},
 				{
-					"filename": "soup_idle_tomato_0_onion_2.png",
+					"filename": "soup_idle_onion_2.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -430,7 +430,7 @@
 					}
 				},
 				{
-					"filename": "soup_idle_tomato_0_onion_3.png",
+					"filename": "soup_idle_onion_3.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -451,7 +451,7 @@
 					}
 				},
 				{
-					"filename": "soup_idle_tomato_1_onion_0.png",
+					"filename": "soup_idle_tomato_1.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -514,7 +514,7 @@
 					}
 				},
 				{
-					"filename": "soup_idle_tomato_2_onion_0.png",
+					"filename": "soup_idle_tomato_2.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -575,6 +575,166 @@
 						"w": 15,
 						"h": 15
 					}
+				},
+				{
+					"filename": "soup_idle_onion_1_chicken_1.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 15,
+						"h": 12
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 15,
+						"h": 15
+					},
+					"frame": {
+						"x": 405,
+						"y": 1,
+						"w": 15,
+						"h": 15}
+				},
+				{
+					"filename": "soup_idle_chicken_1.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 15,
+						"h": 12
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 15,
+						"h": 15
+					},
+					"frame": {
+						"x": 420,
+						"y": 1,
+						"w": 15,
+						"h": 15}
+				},
+				{
+					"filename": "soup_idle_tomato_1_chicken_1.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 15,
+						"h": 12
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 15,
+						"h": 15
+					},
+					"frame": {
+						"x": 435,
+						"y": 1,
+						"w": 15,
+						"h": 15}
+				},
+				{
+					"filename": "soup_idle_tomato_2_chicken_1.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 15,
+						"h": 12
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 15,
+						"h": 15
+					},
+					"frame": {
+						"x": 450,
+						"y": 1,
+						"w": 15,
+						"h": 15}
+				},
+				{
+					"filename": "soup_idle_onion_2_chicken_1.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 15,
+						"h": 12
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 15,
+						"h": 15
+					},
+					"frame": {
+						"x": 465,
+						"y": 1,
+						"w": 15,
+						"h": 15}
+				},
+				{
+					"filename": "soup_idle_tomato_1_onion_1_chicken_1.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 15,
+						"h": 12
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 15,
+						"h": 15
+					},
+					"frame": {
+						"x": 480,
+						"y": 1,
+						"w": 15,
+						"h": 15}
+				},
+				{
+					"filename": "soup_idle_chicken_2.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 15,
+						"h": 12
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 15,
+						"h": 15
+					},
+					"frame": {
+						"x": 495,
+						"y": 1,
+						"w": 15,
+						"h": 15}
+				},
+				{
+					"filename": "soup_idle_chicken_3.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 15,
+						"h": 12
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 15,
+						"h": 15
+					},
+					"frame": {
+						"x": 510,
+						"y": 1,
+						"w": 15,
+						"h": 15}
 				}
 			]
 		}

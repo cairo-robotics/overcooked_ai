@@ -298,9 +298,23 @@ class StateVisualizer:
 
     @staticmethod
     def _soup_frame_name(ingredients_names, status):
+            if status == "cooked" or status == "done":
+                return "soup_%s_onion_3" %(status)
+
+
             num_onions = ingredients_names.count("onion")
             num_tomatoes = ingredients_names.count("tomato")
-            return "soup_%s_tomato_%i_onion_%i" %(status, num_tomatoes, num_onions)
+            num_chickens = ingredients_names.count("chicken") # added by KB
+            # return "soup_%s_tomato_%i_onion_%i" %(status, num_tomatoes, num_onions)
+            name = "soup_%s" %(status)
+            if num_tomatoes > 0:
+                name += "_tomato_%i" %(num_tomatoes)
+            if num_onions > 0:
+                name += "_onion_%i" %(num_onions)
+            if num_chickens > 0:
+                name += "_chicken_%i" %(num_chickens)
+            return name
+            
 
     def _render_objects(self, surface, objects, grid):
         def render_soup(surface, obj, grid):
