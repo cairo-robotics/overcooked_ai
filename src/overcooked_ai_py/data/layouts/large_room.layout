@@ -2,8 +2,8 @@
     "grid":  """XXXPXXX
                 O    2O
                 X     X
-                X     X
-                X     X
+                C     X
+                X     T
                 X1    X
                 XDXXXSX""",
     "start_bonus_orders": [],

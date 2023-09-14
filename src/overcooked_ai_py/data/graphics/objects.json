@@ -1,315 +1,797 @@
 {
-	"frames": {
-		"dish.png": {
-			"frame": {
-				"x": 1,
-				"y": 1,
-				"w": 15,
-				"h": 15
+	"textures": [
+		{
+			"image": "objects.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 114,
+				"h": 77
 			},
-			"rotated": false,
-			"trimmed": false,
-			"spriteSourceSize": {
-				"x": 0,
-				"y": 0,
-				"w": 15,
-				"h": 15
-			},
-			"sourceSize": {
-				"w": 15,
-				"h": 15
-			}
-		},
-		"onion.png": {
-			"frame": {
-				"x": 18,
-				"y": 1,
-				"w": 15,
-				"h": 15
-			},
-			"rotated": false,
-			"trimmed": false,
-			"spriteSourceSize": {
-				"x": 0,
-				"y": 0,
-				"w": 15,
-				"h": 15
-			},
-			"sourceSize": {
-				"w": 15,
-				"h": 15
-			}
-		},
-		"pot-explosion.png": {
-			"frame": {
-				"x": 35,
-				"y": 1,
-				"w": 15,
-				"h": 15
-			},
-			"rotated": false,
-			"trimmed": false,
-			"spriteSourceSize": {
-				"x": 0,
-				"y": 0,
-				"w": 15,
-				"h": 15
-			},
-			"sourceSize": {
-				"w": 15,
-				"h": 15
-			}
-		},
-		"soup-onion-1-cooking.png": {
-			"frame": {
-				"x": 52,
-				"y": 1,
-				"w": 15,
-				"h": 15
-			},
-			"rotated": false,
-			"trimmed": false,
-			"spriteSourceSize": {
-				"x": 0,
-				"y": 0,
-				"w": 15,
-				"h": 15
-			},
-			"sourceSize": {
-				"w": 15,
-				"h": 15
-			}
-		},
-		"soup-onion-2-cooking.png": {
-			"frame": {
-				"x": 69,
-				"y": 1,
-				"w": 15,
-				"h": 15
-			},
-			"rotated": false,
-			"trimmed": false,
-			"spriteSourceSize": {
-				"x": 0,
-				"y": 0,
-				"w": 15,
-				"h": 15
-			},
-			"sourceSize": {
-				"w": 15,
-				"h": 15
-			}
-		},
-		"soup-onion-3-cooking.png": {
-			"frame": {
-				"x": 86,
-				"y": 1,
-				"w": 15,
-				"h": 15
-			},
-			"rotated": false,
-			"trimmed": false,
-			"spriteSourceSize": {
-				"x": 0,
-				"y": 0,
-				"w": 15,
-				"h": 15
-			},
-			"sourceSize": {
-				"w": 15,
-				"h": 15
-			}
-		},
-		"soup-onion-cooked.png": {
-			"frame": {
-				"x": 103,
-				"y": 1,
-				"w": 15,
-				"h": 15
-			},
-			"rotated": false,
-			"trimmed": false,
-			"spriteSourceSize": {
-				"x": 0,
-				"y": 0,
-				"w": 15,
-				"h": 15
-			},
-			"sourceSize": {
-				"w": 15,
-				"h": 15
-			}
-		},
-		"soup-onion-dish.png": {
-			"frame": {
-				"x": 120,
-				"y": 1,
-				"w": 15,
-				"h": 15
-			},
-			"rotated": false,
-			"trimmed": false,
-			"spriteSourceSize": {
-				"x": 0,
-				"y": 0,
-				"w": 15,
-				"h": 15
-			},
-			"sourceSize": {
-				"w": 15,
-				"h": 15
-			}
-		},
-		"soup-tomato-1-cooking.png": {
-			"frame": {
-				"x": 137,
-				"y": 1,
-				"w": 15,
-				"h": 15
-			},
-			"rotated": false,
-			"trimmed": false,
-			"spriteSourceSize": {
-				"x": 0,
-				"y": 0,
-				"w": 15,
-				"h": 15
-			},
-			"sourceSize": {
-				"w": 15,
-				"h": 15
-			}
-		},
-		"soup-tomato-2-cooking.png": {
-			"frame": {
-				"x": 154,
-				"y": 1,
-				"w": 15,
-				"h": 15
-			},
-			"rotated": false,
-			"trimmed": false,
-			"spriteSourceSize": {
-				"x": 0,
-				"y": 0,
-				"w": 15,
-				"h": 15
-			},
-			"sourceSize": {
-				"w": 15,
-				"h": 15
-			}
-		},
-		"soup-tomato-3-0.png": {
-			"frame": {
-				"x": 171,
-				"y": 1,
-				"w": 15,
-				"h": 15
-			},
-			"rotated": false,
-			"trimmed": false,
-			"spriteSourceSize": {
-				"x": 0,
-				"y": 0,
-				"w": 15,
-				"h": 15
-			},
-			"sourceSize": {
-				"w": 15,
-				"h": 15
-			}
-		},
-		"soup-tomato-3-cooking.png": {
-			"frame": {
-				"x": 188,
-				"y": 1,
-				"w": 15,
-				"h": 15
-			},
-			"rotated": false,
-			"trimmed": false,
-			"spriteSourceSize": {
-				"x": 0,
-				"y": 0,
-				"w": 15,
-				"h": 15
-			},
-			"sourceSize": {
-				"w": 15,
-				"h": 15
-			}
-		},
-		"soup-tomato-cooked.png": {
-			"frame": {
-				"x": 205,
-				"y": 1,
-				"w": 15,
-				"h": 15
-			},
-			"rotated": false,
-			"trimmed": false,
-			"spriteSourceSize": {
-				"x": 0,
-				"y": 0,
-				"w": 15,
-				"h": 15
-			},
-			"sourceSize": {
-				"w": 15,
-				"h": 15
-			}
-		},
-		"soup-tomato-dish.png": {
-			"frame": {
-				"x": 222,
-				"y": 1,
-				"w": 15,
-				"h": 15
-			},
-			"rotated": false,
-			"trimmed": false,
-			"spriteSourceSize": {
-				"x": 0,
-				"y": 0,
-				"w": 15,
-				"h": 15
-			},
-			"sourceSize": {
-				"w": 15,
-				"h": 15
-			}
-		},
-		"tomato.png": {
-			"frame": {
-				"x": 239,
-				"y": 1,
-				"w": 15,
-				"h": 15
-			},
-			"rotated": false,
-			"trimmed": false,
-			"spriteSourceSize": {
-				"x": 0,
-				"y": 0,
-				"w": 15,
-				"h": 15
-			},
-			"sourceSize": {
-				"w": 15,
-				"h": 15
-			}
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "fish.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 17,
+						"h": 17
+					},
+					"spriteSourceSize": {
+						"x": 4,
+						"y": 5,
+						"w": 7,
+						"h": 7
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 7,
+						"h": 7
+					}
+				},
+				{
+					"filename": "cabbage.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 17,
+						"h": 17
+					},
+					"spriteSourceSize": {
+						"x": 5,
+						"y": 5,
+						"w": 7,
+						"h": 8
+					},
+					"frame": {
+						"x": 10,
+						"y": 1,
+						"w": 7,
+						"h": 8
+					}
+				},
+				{
+					"filename": "onion.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 17,
+						"h": 17
+					},
+					"spriteSourceSize": {
+						"x": 5,
+						"y": 5,
+						"w": 7,
+						"h": 8
+					},
+					"frame": {
+						"x": 19,
+						"y": 1,
+						"w": 7,
+						"h": 8
+					}
+				},
+				{
+					"filename": "tomato.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 17,
+						"h": 17
+					},
+					"spriteSourceSize": {
+						"x": 5,
+						"y": 4,
+						"w": 7,
+						"h": 8
+					},
+					"frame": {
+						"x": 28,
+						"y": 1,
+						"w": 7,
+						"h": 8
+					}
+				},
+				{
+					"filename": "dish.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 17,
+						"h": 17
+					},
+					"spriteSourceSize": {
+						"x": 3,
+						"y": 3,
+						"w": 11,
+						"h": 11
+					},
+					"frame": {
+						"x": 37,
+						"y": 1,
+						"w": 11,
+						"h": 11
+					}
+				},
+				{
+					"filename": "soup_done_tomato_0_onion_2_cabbage_1_fish_0.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 17,
+						"h": 17
+					},
+					"spriteSourceSize": {
+						"x": 3,
+						"y": 3,
+						"w": 11,
+						"h": 11
+					},
+					"frame": {
+						"x": 50,
+						"y": 1,
+						"w": 11,
+						"h": 11
+					}
+				},
+				{
+					"filename": "soup_done_tomato_0_onion_0_cabbage_0_fish_3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 17,
+						"h": 17
+					},
+					"spriteSourceSize": {
+						"x": 3,
+						"y": 3,
+						"w": 11,
+						"h": 11
+					},
+					"frame": {
+						"x": 63,
+						"y": 1,
+						"w": 11,
+						"h": 11
+					}
+				},
+				{
+					"filename": "soup_done_tomato_0_onion_3_cabbage_0_fish_0.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 17,
+						"h": 17
+					},
+					"spriteSourceSize": {
+						"x": 3,
+						"y": 3,
+						"w": 11,
+						"h": 11
+					},
+					"frame": {
+						"x": 76,
+						"y": 1,
+						"w": 11,
+						"h": 11
+					}
+				},
+				{
+					"filename": "soup_done_tomato_2_onion_1_cabbage_0_fish_0.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 17,
+						"h": 17
+					},
+					"spriteSourceSize": {
+						"x": 3,
+						"y": 3,
+						"w": 11,
+						"h": 11
+					},
+					"frame": {
+						"x": 89,
+						"y": 1,
+						"w": 11,
+						"h": 11
+					}
+				},
+				{
+					"filename": "soup_done_tomato_3_onion_0_cabbage_0_fish_0.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 17,
+						"h": 17
+					},
+					"spriteSourceSize": {
+						"x": 3,
+						"y": 3,
+						"w": 11,
+						"h": 11
+					},
+					"frame": {
+						"x": 102,
+						"y": 1,
+						"w": 11,
+						"h": 11
+					}
+				},
+				{
+					"filename": "soup_cooked_tomato_1_onion_0_cabbage_2_fish_0.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 17,
+						"h": 17
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 3,
+						"w": 17,
+						"h": 12
+					},
+					"frame": {
+						"x": 1,
+						"y": 11,
+						"w": 17,
+						"h": 12
+					}
+				},
+				{
+					"filename": "soup_cooked_tomato_0_onion_2_cabbage_1_fish_0.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 17,
+						"h": 17
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 3,
+						"w": 17,
+						"h": 12
+					},
+					"frame": {
+						"x": 20,
+						"y": 14,
+						"w": 17,
+						"h": 12
+					}
+				},
+				{
+					"filename": "soup_idle_tomato_0_onion_0_cabbage_0_fish_1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 17,
+						"h": 17
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 3,
+						"w": 17,
+						"h": 12
+					},
+					"frame": {
+						"x": 39,
+						"y": 14,
+						"w": 17,
+						"h": 12
+					}
+				},
+				{
+					"filename": "soup_idle_tomato_0_onion_0_cabbage_0_fish_2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 17,
+						"h": 17
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 3,
+						"w": 17,
+						"h": 12
+					},
+					"frame": {
+						"x": 58,
+						"y": 14,
+						"w": 17,
+						"h": 12
+					}
+				},
+				{
+					"filename": "soup_cooked_tomato_0_onion_0_cabbage_0_fish_3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 17,
+						"h": 17
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 3,
+						"w": 17,
+						"h": 12
+					},
+					"frame": {
+						"x": 77,
+						"y": 14,
+						"w": 17,
+						"h": 12
+					}
+				},
+				{
+					"filename": "soup_cooked_tomato_0_onion_3_cabbage_0_fish_0.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 17,
+						"h": 17
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 3,
+						"w": 17,
+						"h": 12
+					},
+					"frame": {
+						"x": 96,
+						"y": 14,
+						"w": 17,
+						"h": 12
+					}
+				},
+				{
+					"filename": "soup_cooked_tomato_2_onion_1_cabbage_0_fish_0.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 17,
+						"h": 17
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 3,
+						"w": 17,
+						"h": 12
+					},
+					"frame": {
+						"x": 1,
+						"y": 25,
+						"w": 17,
+						"h": 12
+					}
+				},
+				{
+					"filename": "soup_cooked_tomato_3_onion_0_cabbage_0_fish_0.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 17,
+						"h": 17
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 3,
+						"w": 17,
+						"h": 12
+					},
+					"frame": {
+						"x": 20,
+						"y": 28,
+						"w": 17,
+						"h": 12
+					}
+				},
+				{
+					"filename": "soup_idle_tomato_0_onion_0_cabbage_2_fish_0.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 17,
+						"h": 17
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 2,
+						"w": 17,
+						"h": 13
+					},
+					"frame": {
+						"x": 39,
+						"y": 28,
+						"w": 17,
+						"h": 13
+					}
+				},
+				{
+					"filename": "soup_idle_tomato_0_onion_0_cabbage_1_fish_0.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 17,
+						"h": 17
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 2,
+						"w": 17,
+						"h": 13
+					},
+					"frame": {
+						"x": 58,
+						"y": 28,
+						"w": 17,
+						"h": 13
+					}
+				},
+				{
+					"filename": "soup_idle_tomato_0_onion_1_cabbage_1_fish_0.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 17,
+						"h": 17
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 2,
+						"w": 17,
+						"h": 13
+					},
+					"frame": {
+						"x": 77,
+						"y": 28,
+						"w": 17,
+						"h": 13
+					}
+				},
+				{
+					"filename": "soup_idle_tomato_0_onion_1_cabbage_1_fish_0.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 17,
+						"h": 17
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 2,
+						"w": 17,
+						"h": 13
+					},
+					"frame": {
+						"x": 77,
+						"y": 28,
+						"w": 17,
+						"h": 13
+					}
+				},
+				{
+					"filename": "soup_idle_tomato_1_onion_0_cabbage_1_fish_0.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 17,
+						"h": 17
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 2,
+						"w": 17,
+						"h": 13
+					},
+					"frame": {
+						"x": 96,
+						"y": 28,
+						"w": 17,
+						"h": 13
+					}
+				},
+				{
+					"filename": "soup_idle_tomato_0_onion_1_cabbage_0_fish_0.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 17,
+						"h": 17
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 2,
+						"w": 17,
+						"h": 13
+					},
+					"frame": {
+						"x": 1,
+						"y": 39,
+						"w": 17,
+						"h": 13
+					}
+				},
+				{
+					"filename": "soup_idle_tomato_0_onion_2_cabbage_0_fish_0.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 17,
+						"h": 17
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 2,
+						"w": 17,
+						"h": 13
+					},
+					"frame": {
+						"x": 20,
+						"y": 42,
+						"w": 17,
+						"h": 13
+					}
+				},
+				{
+					"filename": "soup_idle_tomato_1_onion_1_cabbage_0_fish_0.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 17,
+						"h": 17
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 2,
+						"w": 17,
+						"h": 13
+					},
+					"frame": {
+						"x": 39,
+						"y": 43,
+						"w": 17,
+						"h": 13
+					}
+				},
+				{
+					"filename": "soup_idle_tomato_1_onion_1_cabbage_0_fish_0.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 17,
+						"h": 17
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 2,
+						"w": 17,
+						"h": 13
+					},
+					"frame": {
+						"x": 39,
+						"y": 43,
+						"w": 17,
+						"h": 13
+					}
+				},
+				{
+					"filename": "soup_idle_tomato_1_onion_0_cabbage_0_fish_0.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 17,
+						"h": 17
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 2,
+						"w": 17,
+						"h": 13
+					},
+					"frame": {
+						"x": 58,
+						"y": 43,
+						"w": 17,
+						"h": 13
+					}
+				},
+				{
+					"filename": "soup_idle_tomato_2_onion_0_cabbage_0_fish_0.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 17,
+						"h": 17
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 2,
+						"w": 17,
+						"h": 13
+					},
+					"frame": {
+						"x": 77,
+						"y": 43,
+						"w": 17,
+						"h": 13
+					}
+				},
+				{
+					"filename": "soup_idle_tomato_1_onion_0_cabbage_2_fish_0.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 17,
+						"h": 17
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 1,
+						"w": 17,
+						"h": 14
+					},
+					"frame": {
+						"x": 96,
+						"y": 43,
+						"w": 17,
+						"h": 14
+					}
+				},
+				{
+					"filename": "soup_idle_tomato_0_onion_2_cabbage_1_fish_0.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 17,
+						"h": 17
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 1,
+						"w": 17,
+						"h": 14
+					},
+					"frame": {
+						"x": 1,
+						"y": 54,
+						"w": 17,
+						"h": 14
+					}
+				},
+				{
+					"filename": "soup_idle_tomato_0_onion_0_cabbage_0_fish_3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 17,
+						"h": 17
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 1,
+						"w": 17,
+						"h": 14
+					},
+					"frame": {
+						"x": 20,
+						"y": 57,
+						"w": 17,
+						"h": 14
+					}
+				},
+				{
+					"filename": "soup_idle_tomato_0_onion_3_cabbage_0_fish_0.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 17,
+						"h": 17
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 1,
+						"w": 17,
+						"h": 14
+					},
+					"frame": {
+						"x": 39,
+						"y": 58,
+						"w": 17,
+						"h": 14
+					}
+				},
+				{
+					"filename": "soup_idle_tomato_2_onion_1_cabbage_0_fish_0.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 17,
+						"h": 17
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 1,
+						"w": 17,
+						"h": 14
+					},
+					"frame": {
+						"x": 58,
+						"y": 58,
+						"w": 17,
+						"h": 14
+					}
+				},
+				{
+					"filename": "soup_tomato_tomato_2_onion_0_cabbage_0_fish_0-0.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 17,
+						"h": 17
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 1,
+						"w": 17,
+						"h": 14
+					},
+					"frame": {
+						"x": 77,
+						"y": 58,
+						"w": 17,
+						"h": 14
+					}
+				},
+				{
+					"filename": "soup_idle_tomato_3_onion_0_cabbage_0_fish_0.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 17,
+						"h": 17
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 1,
+						"w": 17,
+						"h": 14
+					},
+					"frame": {
+						"x": 77,
+						"y": 58,
+						"w": 17,
+						"h": 14
+					}
+				},
+				{
+					"filename": "pot-explosion.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 17,
+						"h": 17
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 17,
+						"h": 17
+					},
+					"frame": {
+						"x": 96,
+						"y": 59,
+						"w": 17,
+						"h": 17
+					}
+				}
+			]
 		}
-	},
+	],
 	"meta": {
-		"app": "http://www.codeandweb.com/texturepacker",
-		"version": "1.0",
-		"image": "spritesheet.png",
-		"format": "RGBA8888",
-		"size": {
-			"w": 255,
-			"h": 17
-		},
-		"scale": "1"
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:3bd9c3e1da9cba0ad585d71130003cea:54312ca5c08b43f9bb04c2d1a8fe557a:8d6d12ff4d5234f2a4b19e0a906dbf52$"
 	}
 }

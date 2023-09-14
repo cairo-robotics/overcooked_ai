@@ -2,7 +2,7 @@ import pygame
 import os, copy, math
 from overcooked_ai_py.utils import generate_temporary_file_path, classproperty, cumulative_rewards_from_rew_list
 from overcooked_ai_py.static import GRAPHICS_DIR, FONTS_DIR
-from overcooked_ai_py.mdp.layout_generator import EMPTY, COUNTER, ONION_DISPENSER, TOMATO_DISPENSER, CHICKEN_DISPENSER, POT, DISH_DISPENSER, SERVING_LOC
+from overcooked_ai_py.mdp.layout_generator import EMPTY, COUNTER, ONION_DISPENSER, TOMATO_DISPENSER, FISH_DISPENSER, CABBAGE_DISPENSER, POT, DISH_DISPENSER, SERVING_LOC
 from overcooked_ai_py.visualization.visualization_utils import show_image_in_ipython, show_ipython_images_slider
 from overcooked_ai_py.visualization.pygame_utils import MultiFramePygameImage, run_static_resizeable_window, vstack_surfaces, scale_surface_by_factor, blit_on_new_surface_of_size
 from overcooked_ai_py.mdp.actions import Direction, Action
@@ -53,10 +53,11 @@ class StateVisualizer:
         COUNTER: "counter",
         ONION_DISPENSER: "onions",
         TOMATO_DISPENSER: "tomatoes",
-        CHICKEN_DISPENSER: "chicken", # added by KB
         POT: "pot",
         DISH_DISPENSER: "dishes",
-        SERVING_LOC: "serve"
+        SERVING_LOC: "serve",
+        CABBAGE_DISPENSER: "cabbages",
+        FISH_DISPENSER: "fishes",
     }
 
     def __init__(self, **kwargs):
@@ -242,11 +243,60 @@ class StateVisualizer:
         x_tiles = len(grid[0])
         return (x_tiles * self.UNSCALED_TILE_SIZE, y_tiles * self.UNSCALED_TILE_SIZE)
 
-    def _render_grid(self, surface, grid):
+    def _render_grid(self, surface, grid, trajectory=None):
         for y_tile, row in enumerate(grid):
             for x_tile, tile in enumerate(row):
-                self.TERRAINS_IMG.blit_on_surface(surface, self._position_in_unscaled_pixels((x_tile, y_tile)), 
-                                             StateVisualizer.TILE_TO_FRAME_NAME[tile])
+                self.TERRAINS_IMG.blit_on_surface(
+                    surface,
+                    self._position_in_unscaled_pixels((x_tile, y_tile)),
+                    StateVisualizer.TILE_TO_FRAME_NAME[tile],
+                )
+        # show trajectory in grid
+        if trajectory is not None and len(trajectory) > 0:
+            for i in range(len(trajectory)-1):
+                curr_x, curr_y, _ = trajectory[i]
+                prev_x, prev_y, _ = trajectory[i-1]
+                curr_action = (trajectory[i+1][0]-curr_x, trajectory[i+1][1]-curr_y)        
+                prev_action = (curr_x-prev_x, curr_y-prev_y)
+                curr_name = Direction.DIRECTION_TO_NAME[curr_action].lower()
+                if i == 0:
+                    frame_name = "floor-stop-%s" % curr_name
+                else:
+                    prev_name = Direction.DIRECTION_TO_NAME[prev_action].lower()
+                    if prev_name == "north":
+                        if curr_name == "north" or curr_name == "south":
+                            frame_name = "floor-%s-%s" % ("south", "north")
+                        elif curr_name == "east":
+                            frame_name = "floor-%s-%s" % ("south", "east")
+                        elif curr_name == "west":
+                            frame_name = "floor-%s-%s" % ("west", "south")
+                    elif prev_name == "south":
+                        if curr_name == "north" or curr_name == "south":
+                            frame_name = "floor-%s-%s" % ("south", "north")
+                        elif curr_name == "east":
+                            frame_name = "floor-%s-%s" % ("north", "east")
+                        elif curr_name == "west":
+                            frame_name = "floor-%s-%s" % ("west", "north")
+                    elif prev_name == "east":
+                        if curr_name == "west" or curr_name == "east":
+                            frame_name = "floor-%s-%s" % ("west", "east")
+                        elif curr_name == "north":
+                            frame_name = "floor-%s-%s" % ("west", "north")
+                        elif curr_name == "south":
+                            frame_name = "floor-%s-%s" % ("west", "south")
+                    elif prev_name == "west":
+                        if curr_name == "west" or curr_name == "east":
+                            frame_name = "floor-%s-%s" % ("west", "east")
+                        elif curr_name == "north":
+                            frame_name = "floor-%s-%s" % ("north", "east")
+                        elif curr_name == "south":
+                            frame_name = "floor-%s-%s" % ("south", "east")
+                
+                self.TERRAINS_IMG.blit_on_surface(
+                    surface,
+                    self._position_in_unscaled_pixels((curr_x, curr_y)),
+                    frame_name,
+                )
 
     def _position_in_unscaled_pixels(self, position):
         """
@@ -270,7 +320,7 @@ class StateVisualizer:
             return frame_name
 
         def hat_frame_name(direction_name, player_color_name):
-            return "%s-%shat" %(direction_name, player_color_name)
+            return "%s-%shat" % (direction_name, player_color_name)
 
         for player_num, player in enumerate(players):
             player_color_name = self.player_colors[player_num]
@@ -288,19 +338,30 @@ class StateVisualizer:
                 else:
                     held_object_name = held_obj.name
 
-            self.CHEFS_IMG.blit_on_surface(surface, self._position_in_unscaled_pixels(player.position), chef_frame_name(direction_name, held_object_name))
-            self.CHEFS_IMG.blit_on_surface(surface, self._position_in_unscaled_pixels(player.position), hat_frame_name(direction_name, player_color_name))
-            # print(f'{player_num} =? {pidx}')
-            if pidx is not None and player_num == pidx:
-                rescaled_circle = pygame.transform.scale(self.CIRCLE_IMG, (self.UNSCALED_TILE_SIZE, self.UNSCALED_TILE_SIZE))
-                self._render_on_tile_position(surface, rescaled_circle, player.position, horizontal_align="center", vertical_align="center")
-                # self.CHEFS_IMG.blit_on_surface(surface, self._position_in_unscaled_pixels(agent.position), hat_frame_name(direction_name, 'red'))
+            self.CHEFS_IMG.blit_on_surface(
+                surface,
+                self._position_in_unscaled_pixels(player.position),
+                chef_frame_name(direction_name, held_object_name),
+            )
+            self.CHEFS_IMG.blit_on_surface(
+                surface,
+                self._position_in_unscaled_pixels(player.position),
+                hat_frame_name(direction_name, player_color_name),
+            )
 
     @staticmethod
     def _soup_frame_name(ingredients_names, status):
-            num_onions = ingredients_names.count("onion")
-            num_tomatoes = ingredients_names.count("tomato")
-            return "soup_%s_tomato_%i_onion_%i" %(status, num_tomatoes, num_onions)
+        num_onions = ingredients_names.count("onion")
+        num_tomatoes = ingredients_names.count("tomato")
+        num_fish = ingredients_names.count("fish")
+        num_cabbages = ingredients_names.count("cabbage")
+        return "soup_%s_tomato_%i_onion_%i_cabbage_%i_fish_%i" % (
+            status,
+            num_tomatoes,
+            num_onions,
+            num_cabbages,
+            num_fish
+        )
 
     def _render_objects(self, surface, objects, grid):
         def render_soup(surface, obj, grid):
@@ -312,26 +373,54 @@ class StateVisualizer:
                     soup_status = "idle"
             else: # grid[x][y] != POT
                 soup_status = "done"
-            frame_name = StateVisualizer._soup_frame_name(obj.ingredients, soup_status)
-            self.SOUPS_IMG.blit_on_surface(surface, self._position_in_unscaled_pixels(obj.position), frame_name)
+            frame_name = StateVisualizer._soup_frame_name(
+                obj.ingredients, soup_status
+            )
+            print(obj.ingredients, soup_status, frame_name)
+            self.OBJECTS_IMG.blit_on_surface(
+                surface,
+                self._position_in_unscaled_pixels(obj.position),
+                frame_name,
+            )
 
         for obj in objects.values():
             if obj.name == "soup":
                 render_soup(surface, obj, grid)
             else:
-                self.OBJECTS_IMG.blit_on_surface(surface, self._position_in_unscaled_pixels(obj.position), obj.name)            
+                self.OBJECTS_IMG.blit_on_surface(
+                    surface,
+                    self._position_in_unscaled_pixels(obj.position),
+                    obj.name,
+                )
 
     def _render_cooking_timers(self, surface, objects, grid):
         for key, obj in objects.items():
             (x_pos, y_pos) = obj.position
             if obj.name == "soup" and grid[y_pos][x_pos] == POT:
-                if obj._cooking_tick != -1 and (obj._cooking_tick <= obj.cook_time or self.show_timer_when_cooked):
-                    text_surface = self.cooking_timer_font.render(str(obj._cooking_tick), True, self.cooking_timer_font_color)
-                    (tile_pos_x, tile_pos_y) = self._position_in_scaled_pixels(obj.position)
+                if obj._cooking_tick != -1 and (
+                    obj._cooking_tick <= obj.cook_time
+                    or self.show_timer_when_cooked
+                ):
+                    text_surface = self.cooking_timer_font.render(
+                        str(obj._cooking_tick),
+                        True,
+                        self.cooking_timer_font_color,
+                    )
+                    (tile_pos_x, tile_pos_y) = self._position_in_scaled_pixels(
+                        obj.position
+                    )
 
                     # calculate font position to be in center on x axis, and 0.9 from top on y axis
-                    font_position = (tile_pos_x + int((self.tile_size - text_surface.get_width() ) * 0.5), 
-                                 tile_pos_y + int((self.tile_size - text_surface.get_height() ) * 0.9))
+                    font_position = (
+                        tile_pos_x
+                        + int(
+                            (self.tile_size - text_surface.get_width()) * 0.5
+                        ),
+                        tile_pos_y
+                        + int(
+                            (self.tile_size - text_surface.get_height()) * 0.9
+                        ),
+                    )
                     surface.blit(text_surface, font_position)
 
     def _sorted_hud_items(self, hud_data):
