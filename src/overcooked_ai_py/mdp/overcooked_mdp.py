@@ -2023,8 +2023,8 @@ class OvercookedGridworld(object):
     def log_object_potting(self, events_infos, state, old_soup, new_soup, obj_name, player_index):
         """Player added an ingredient to a pot"""
         obj_pickup_key = "potting_" + obj_name
-        if obj_pickup_key not in events_infos:
-            raise ValueError("Unknown event {}".format(obj_pickup_key))
+        # if obj_pickup_key not in events_infos:
+        #     raise ValueError("Unknown event {}".format(obj_pickup_key))
         events_infos[obj_pickup_key][player_index] = True
 
         POTTING_FNS = {
@@ -2043,8 +2043,8 @@ class OvercookedGridworld(object):
     def log_object_pickup(self, events_infos, state, obj_name, pot_states, player_index):
         """Player picked an object up from a counter or a dispenser"""
         obj_pickup_key = obj_name + "_pickup"
-        if obj_pickup_key not in events_infos:
-            raise ValueError("Unknown event {}".format(obj_pickup_key))
+        # if obj_pickup_key not in events_infos:
+        #     raise ValueError("Unknown event {}".format(obj_pickup_key))
         events_infos[obj_pickup_key][player_index] = True
         
         USEFUL_PICKUP_FNS = {
@@ -2060,8 +2060,8 @@ class OvercookedGridworld(object):
     def log_object_drop(self, events_infos, state, obj_name, pot_states, player_index):
         """Player dropped the object on a counter"""
         obj_drop_key = obj_name + "_drop"
-        if obj_drop_key not in events_infos:
-            raise ValueError("Unknown event {}".format(obj_drop_key))
+        # if obj_drop_key not in events_infos:
+        #     raise ValueError("Unknown event {}".format(obj_drop_key))
         events_infos[obj_drop_key][player_index] = True
         
         USEFUL_DROP_FNS = {
