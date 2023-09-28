@@ -1742,6 +1742,12 @@ class OvercookedGridworld(object):
 
     def get_tomato_dispenser_locations(self):
         return list(self.terrain_pos_dict['T'])
+    
+    def get_cabbage_dispenser_locations(self):
+        return list(self.terrain_pos_dict['C'])
+
+    def get_fish_dispenser_locations(self):
+        return list(self.terrain_pos_dict['F'])
 
     def get_serving_locations(self):
         return list(self.terrain_pos_dict['S'])
