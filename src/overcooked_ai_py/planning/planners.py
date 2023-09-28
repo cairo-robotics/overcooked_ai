@@ -264,13 +264,15 @@ class MotionPlanner(object):
         start_position, start_orientation = start_motion_state
         return [(action, self.mdp._move_if_direction(start_position, start_orientation, action)) for action in Action.ALL_ACTIONS]
 
-    def min_cost_between_features(self, pos_list1, pos_list2, manhattan_if_fail=False):
+    def min_cost_between_features(self, pos_list1, pos_list2, manhattan_if_fail=False, with_argmin=True):
         """
         Determines the minimum number of timesteps necessary for a agent to go from any
         terrain feature in list1 to any feature in list2 and perform an interact action
         """
         min_dist = np.Inf
         min_manhattan = np.Inf
+        best_goal = None
+        print(self.motion_goals_for_pos)
         for pos1, pos2 in itertools.product(pos_list1, pos_list2):
             for mg1, mg2 in itertools.product(self.motion_goals_for_pos[pos1], self.motion_goals_for_pos[pos2]):
                 if not self.is_valid_motion_start_goal_pair(mg1, mg2):
@@ -283,13 +285,18 @@ class MotionPlanner(object):
                 curr_dist = self.get_gridworld_distance(mg1, mg2)
                 if curr_dist < min_dist:
                     min_dist = curr_dist
+                    best_goal = mg2
                 
         # +1 to account for interaction action
         if manhattan_if_fail and min_dist == np.Inf:
             min_dist = min_manhattan
         min_cost = min_dist + 1
-        return min_cost
-
+        
+        if with_argmin:
+            return min_cost, best_goal
+        else:
+            return min_cost
+        
     def min_cost_to_feature(self, start_pos_and_or, feature_pos_list, with_argmin=False, debug=False):
         """
         Determines the minimum number of timesteps necessary for a agent to go from the starting
@@ -305,7 +312,7 @@ class MotionPlanner(object):
                     continue
                 curr_dist = self.get_gridworld_distance(start_pos_and_or, feature_goal)
                 if curr_dist < min_dist:
-                    best_feature = feature_pos
+                    best_feature = feature_goal
                     min_dist = curr_dist
         # +1 to account for interaction action
         min_cost = min_dist + 1
