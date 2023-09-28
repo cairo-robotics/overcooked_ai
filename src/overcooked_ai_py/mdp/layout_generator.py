@@ -1,21 +1,31 @@
 import numpy as np
 
 import random, copy
-from overcooked_ai_py.utils import rnd_int_uniform, rnd_uniform
+# from overcooked_ai_py.utils import rnd_int_uniform, rnd_uniform
 from overcooked_ai_py.mdp.actions import Action, Direction
 from overcooked_ai_py.mdp.overcooked_mdp import OvercookedGridworld, Recipe
 
-EMPTY = ' '
-COUNTER = 'X'
-ONION_DISPENSER = 'O'
-TOMATO_DISPENSER = 'T'
-CHICKEN_DISPENSER = 'C'
-POT = 'P'
-DISH_DISPENSER = 'D'
-SERVING_LOC = 'S'
+EMPTY = " "
+COUNTER = "X"
+ONION_DISPENSER = "O"
+TOMATO_DISPENSER = "T"
+POT = "P"
+DISH_DISPENSER = "D"
+SERVING_LOC = "S"
+CABBAGE_DISPENSER = "C"
+FISH_DISPENSER = "F"
 
-CODE_TO_TYPE = {0: EMPTY, 1: COUNTER, 2: ONION_DISPENSER, 3: TOMATO_DISPENSER, 4: POT, 5: DISH_DISPENSER,
-                6: SERVING_LOC}
+CODE_TO_TYPE = {
+    0: EMPTY,
+    1: COUNTER,
+    2: ONION_DISPENSER,
+    3: TOMATO_DISPENSER,
+    4: POT,
+    5: DISH_DISPENSER,
+    6: SERVING_LOC,
+    7: CABBAGE_DISPENSER,
+    8: FISH_DISPENSER
+}
 TYPE_TO_CODE = {v: k for k, v in CODE_TO_TYPE.items()}
 
 
@@ -35,12 +45,10 @@ DEFAULT_MDP_GEN_PARAMS = {
     "inner_shape": (5, 4),
     "prop_empty": 0.95,
     "prop_feats": 0.1,
-    "start_all_orders" : [
-        { "ingredients" : ["onion", "onion", "onion"]}
-    ],
-    "recipe_values" : [20],
-    "recipe_times" : [20],
-    "display": False
+    "start_all_orders": [{"ingredients": ["onion", "onion", "onion"]}],
+    "recipe_values": [20],
+    "recipe_times": [20],
+    "display": False,
 }
 
 
@@ -49,12 +57,10 @@ def DEFAILT_PARAMS_SCHEDULE_FN(outside_information):
         "inner_shape": (5, 4),
         "prop_empty": 0.95,
         "prop_feats": 0.1,
-        "start_all_orders" : [
-        { "ingredients" : ["onion", "onion", "onion"]}
-        ],
-        "recipe_values" : [20],
-        "recipe_times" : [20],
-        "display": False
+        "start_all_orders": [{"ingredients": ["onion", "onion", "onion"]}],
+        "recipe_values": [20],
+        "recipe_times": [20],
+        "display": False,
     }
     return mdp_default_gen_params
 
@@ -83,7 +89,14 @@ class MDPParamsGenerator(object):
         mdp_params = self.params_schedule_fn(outside_information)
         return mdp_params
 
-DEFAULT_FEATURE_TYPES = (POT, ONION_DISPENSER, DISH_DISPENSER, SERVING_LOC) # NOTE: TOMATO_DISPENSER is disabled by default
+
+DEFAULT_FEATURE_TYPES = (
+    POT,
+    ONION_DISPENSER,
+    DISH_DISPENSER,
+    SERVING_LOC,
+)  # NOTE: TOMATO_DISPENSER is disabled by default
+
 
 class LayoutGenerator(object):
     # NOTE: This class hasn't been tested extensively.
@@ -384,7 +397,12 @@ class Grid(object):
             return False
 
         # If one of the edges of the map, or outside the map
-        if x <= 0 or y <= 0 or x >= self.shape[0] - 1 or y >= self.shape[1] - 1:
+        if (
+            x <= 0
+            or y <= 0
+            or x >= self.shape[0] - 1
+            or y >= self.shape[1] - 1
+        ):
             return False
         return True
 
@@ -409,7 +427,13 @@ class Grid(object):
             return False
 
         # If location is next to at least one empty square
-        if any([loc for loc in self.get_near_locations(location) if CODE_TO_TYPE[self.terrain_at_loc(loc)] == EMPTY]):
+        if any(
+            [
+                loc
+                for loc in self.get_near_locations(location)
+                if CODE_TO_TYPE[self.terrain_at_loc(loc)] == EMPTY
+            ]
+        ):
             return True
         else:
             return False
