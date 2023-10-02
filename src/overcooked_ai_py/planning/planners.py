@@ -168,7 +168,7 @@ class MotionPlanner(object):
         # Restricting goals to be facing a terrain feature
         pos_of_facing_terrain = Action.move_in_direction(goal_position, goal_orientation)
         facing_terrain_type = self.mdp.get_terrain_type_at_pos(pos_of_facing_terrain)
-        if facing_terrain_type == ' ' or (facing_terrain_type == 'X' and pos_of_facing_terrain not in self.counter_goals):
+        if facing_terrain_type == ' ' or (facing_terrain_type == 'X' and not self.counter_goals):
             return False
         return True
 
@@ -272,7 +272,6 @@ class MotionPlanner(object):
         min_dist = np.Inf
         min_manhattan = np.Inf
         best_goal = None
-        print(self.motion_goals_for_pos)
         for pos1, pos2 in itertools.product(pos_list1, pos_list2):
             for mg1, mg2 in itertools.product(self.motion_goals_for_pos[pos1], self.motion_goals_for_pos[pos2]):
                 if not self.is_valid_motion_start_goal_pair(mg1, mg2):
