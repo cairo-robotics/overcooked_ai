@@ -85,7 +85,7 @@ class MultiFramePygameImage:
     def blit_on_surface(
         self, surface, top_left_pixel_position, frame_name, **kwargs
     ):
-        print(self.frames_rectangles)
+        # print(self.frames_rectangles)
         surface.blit(
             self.image,
             top_left_pixel_position,

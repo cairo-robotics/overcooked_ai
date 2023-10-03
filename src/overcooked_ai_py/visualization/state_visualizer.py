@@ -376,7 +376,7 @@ class StateVisualizer:
             frame_name = StateVisualizer._soup_frame_name(
                 obj.ingredients, soup_status
             )
-            print(obj.ingredients, soup_status, frame_name)
+            # print(obj.ingredients, soup_status, frame_name)
             self.OBJECTS_IMG.blit_on_surface(
                 surface,
                 self._position_in_unscaled_pixels(obj.position),
