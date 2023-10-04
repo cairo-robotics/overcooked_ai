@@ -305,19 +305,21 @@ class MotionPlanner(object):
         assert self.mdp.get_terrain_type_at_pos(start_pos) != 'X'
         min_dist = np.Inf
         best_feature = None
+        best_goal = None
         for feature_pos in feature_pos_list:
             for feature_goal in self.motion_goals_for_pos[feature_pos]:
                 if not self.is_valid_motion_start_goal_pair(start_pos_and_or, feature_goal):
                     continue
                 curr_dist = self.get_gridworld_distance(start_pos_and_or, feature_goal)
                 if curr_dist < min_dist:
-                    best_feature = feature_goal
+                    best_feature = feature_pos
+                    best_goal = feature_goal
                     min_dist = curr_dist
         # +1 to account for interaction action
         min_cost = min_dist + 1
         if with_argmin:
             # assert best_feature is not None, "{} vs {}".format(start_pos_and_or, feature_pos_list)
-            return min_cost, best_feature
+            return min_cost, best_goal, best_feature
         return min_cost
 
     def _get_goal_dict(self):
