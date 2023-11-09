@@ -251,8 +251,8 @@ class OvercookedEnv(object):
         self.game_stats = {**events_dict, **rewards_dict}
 
         self.state.set_orders([Recipe.from_dict(x) for x in np.random.choice(self.mdp.start_all_orders, size=2, replace=True)])
-        print("initializing with orders: {}".format(self.state.all_orders))
-        print("from all orders: {}".format(self.mdp.start_all_orders))
+        # print("initializing with orders: {}".format(self.state.all_orders))
+        # print("from all orders: {}".format(self.mdp.start_all_orders))
 
     def is_done(self):
         """Whether the episode is over."""

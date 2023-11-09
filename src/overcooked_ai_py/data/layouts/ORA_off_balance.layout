@@ -4,6 +4,7 @@
                 O   X   X
                 T   F   X
                 C   X   X
+                X       X
                 XXXXXXXXX""",
     "start_bonus_orders": [],
     "start_all_orders" : [
