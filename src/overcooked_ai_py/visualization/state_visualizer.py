@@ -197,6 +197,7 @@ class StateVisualizer:
         if self.is_rendering_action_probs and action_probs is not None:
             self._render_actions_probs(grid_surface, state.players, action_probs)
 
+        self._render_player_labels(grid_surface, state.players, pidx)
         if self.is_rendering_hud and hud_data:
             hud_width = self.width or grid_surface.get_width()
             hud_surface = pygame.surface.Surface((hud_width, self._calculate_hud_height(hud_data)))
@@ -312,7 +313,19 @@ class StateVisualizer:
         (x,y) = position
         return (self.tile_size * x, self.tile_size * y)
 
+    def _render_player_labels(self, surface, players, pidx=None):
+        for player_num, player in enumerate(players):
+            player_color_name = self.player_colors[player_num]
+            player_label = self.hud_font.render(
+                "P" + str(player_num+1), True, (0, 0, 0) # black
+            )
+            player_position = self._position_in_scaled_pixels(player.position)
+            font_position = (player_position[0] + self.tile_size * 0.5, 
+                             player_position[1] - player_label.get_height())
+            surface.blit(player_label, font_position)
+
     def _render_players(self, surface, players, pidx=None):
+
         def chef_frame_name(direction_name, held_object_name):
             frame_name = direction_name
             if held_object_name:
